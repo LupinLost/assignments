@@ -1,0 +1,22 @@
+
+from bs4 import BeautifulSoup as soup 
+import requests
+
+
+def getlinks (resquest_obj):
+    links = []
+    resquest_soup = soup(resquest_obj,"html.parser")
+
+    for link in resquest_soup.find_all('a', attrs = "href"):
+        links.append(link)
+    return links
+
+def ExtractLinks(url_page):
+    url_request = requests.get(url_page)
+    print url_request.status_code()
+    url_links = []
+    url_links = getlinks(url_request)
+    for link in url_links:
+        print link
+        print link.status_code()
+    return url_links
